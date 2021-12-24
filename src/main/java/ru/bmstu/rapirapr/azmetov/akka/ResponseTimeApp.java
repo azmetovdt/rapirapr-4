@@ -12,16 +12,14 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
 import akka.http.javadsl.server.Route;
-import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import scala.concurrent.Future;
+import javafx.util.Pair;
 
 import java.util.concurrent.CompletionStage;
 
-import static akka.http.javadsl.server.Directives.*;
 
 public class ResponseTimeApp {
     public static final String ACTOR_SYSTEM_NAME = "ResponseTimeActorSystem";
@@ -58,7 +56,7 @@ public class ResponseTimeApp {
                         );
                     })
                 .mapAsync(pair -> {
-                    CompletionStage<Object> = Patterns.ask(actor, new Message(pair.f));
+                    CompletionStage<Object> = Patterns.ask(actor, new Message(pair));
                 })
 
             }
