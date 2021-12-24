@@ -16,10 +16,8 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
 import java.time.Duration;
-import java.util.List;
+import java.util.Collections;
 import java.util.concurrent.CompletionStage;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class ResponseTimeApp {
@@ -60,8 +58,7 @@ public class ResponseTimeApp {
                             CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                             savedResult.thenCompose(
                                     result -> {
-                                        List<Object> resul = Stream.of(result).map().collect(Collectors.toList());
-                                        if (resul.toArray().length > 0) {
+                                        if (Collections.singletonList(result).length > 0) {
                                         }
                                     }
                         }
