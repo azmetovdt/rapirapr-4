@@ -65,10 +65,10 @@ public class ResponseTimeApp {
                                     return CompletableFuture.completedFuture(result);
                                 }
                                 final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                                        Flow.create().mapConcat(
+                                        Flow.<Pair<String, Integer>>create().mapConcat(
                                                 pair -> {
                                                     return new ArrayList<>(
-                                                            Collections.nCopies(pair)
+                                                            Collections.nCopies(pair.first(), pair.first())
                                                     )
                                                 }
                                         )
