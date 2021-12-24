@@ -56,7 +56,7 @@ public class ResponseTimeApp {
                         );
                     })
                 .mapAsync(1, pair -> {
-                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(pair.first()), 5);
+                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(pair.first(), ),;
                 })
 
             }
