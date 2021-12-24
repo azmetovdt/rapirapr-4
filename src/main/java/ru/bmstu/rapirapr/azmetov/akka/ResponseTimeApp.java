@@ -60,7 +60,7 @@ public class ResponseTimeApp {
                             savedResult.thenCompose(
                                     result -> {
                                         if (Collections.singletonList(result).toArray().length > 0) {
-                                            return CompletableFuture
+                                            return CompletableFuture.completedFuture()
                                         }
                                     }
                         }
