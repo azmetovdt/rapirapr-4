@@ -48,7 +48,7 @@ public class ResponseTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
-    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor) {
+    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
                     final Query query = request.getUri().query();
