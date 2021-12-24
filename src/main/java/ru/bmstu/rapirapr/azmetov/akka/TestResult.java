@@ -1,34 +1,28 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 public class TestResult {
-    private final MessageTest messageTest;
-    private final String status;
-    private final String output;
+    private final String url;
+    private final Integer time;
 
-    public TestResult(String url, String status, String output) {
-        this.url = messageTest;
-        this.status = status;
-        this.output = output;
+    public TestResult(String url, Integer time) {
+        this.url = url;
+        this.time = time;
     }
 
-    public MessageTest getMessageTest() {
-        return messageTest;
+
+    public String getUrl() {
+        return url;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public String getOutput() {
-        return this.output;
+    public Integer getTime() {
+        return time;
     }
 
     @Override
     public String toString() {
         return "TestResult{" +
-                "messageTest=" + this.messageTest.toString() + '\n' +
-                ", status='" + this.status + '\'' +
-                ", output='" + this.output + '\'' +
+                ", status='" + this.getUrl() + '\'' +
+                ", output='" + this.getTime() + '\'' +
                 '}';
     }
 }
