@@ -79,6 +79,7 @@ public class ResponseTimeApp {
                             });
                 })
                 .map(request -> {
+                    System.out.println("Saving result");
                     
                 });
     });
