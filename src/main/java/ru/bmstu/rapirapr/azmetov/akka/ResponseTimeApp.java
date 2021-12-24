@@ -71,7 +71,7 @@ public class ResponseTimeApp {
                                             System.out.println("Executing test");
                                             return CompletableFuture.completedFuture(0);
                                         });
-                                return Source.
+                                return Source.single()
                                         .toMat(Sink.fold(0, Integer::sum), Keep.right()).run(materializer);
                             }
                     );
