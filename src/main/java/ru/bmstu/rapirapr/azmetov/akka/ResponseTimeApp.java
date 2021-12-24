@@ -50,6 +50,7 @@ public class ResponseTimeApp {
     private Route createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class).map(
                 (request) -> {
+                    final List<String> parameters = request.getUri().query().getAll();
                     return new Pair<>(request.)
                 }
                 get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
