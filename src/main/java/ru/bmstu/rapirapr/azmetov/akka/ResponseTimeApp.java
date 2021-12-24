@@ -17,6 +17,7 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
+import io.netty.handler.codec.http.HttpScheme;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     System.out.println("Saving result");
-                    return  
+                    return HttpResponse.create().withEntity()
                 });
     });
 
