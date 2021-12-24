@@ -52,7 +52,7 @@ public class ResponseTimeApp {
         return Flow.of(HttpRequest.class)
                 .map(
                 (request) -> {
-                    CompletionStage<Object> = Patterns.ask(actor, new Message());
+
                     final Query query = request.getUri().query();
 
                     return new Pair<>(
@@ -64,7 +64,7 @@ public class ResponseTimeApp {
                 }
         )
                 .mapAsync(request -> {
-                    
+                    CompletionStage<Object> = Patterns.ask(actor, new Message());
                 })
 
             }
