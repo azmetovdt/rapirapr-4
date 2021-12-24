@@ -66,7 +66,7 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     return savedResult.thenCompose(result -> {
                         if (Collections.singletonList(result).toArray().length > 0) {
-                            return CompletableFuture.completedFuture(new Pair<String, Integer>(
+                            return CompletableFuture.completedFuture(new Pair<>(
                                     pair.first(),
                                     (Integer) result
                             ));
@@ -85,7 +85,7 @@ public class ResponseTimeApp {
                     });
                 })
                 .map(request -> {
-                    actor.tell(new TestResult(request.first(), request.second));
+                    actor.tell(new TestResult(request.first(), request.second()));
                     System.out.println("Saving result");
                     return HttpResponse.create().withEntity(request.toString());
                 });
