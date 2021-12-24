@@ -16,6 +16,7 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -65,7 +66,7 @@ public class ResponseTimeApp {
                                 final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                                         Flow.create().mapConcat(
                                                 pair -> {
-                                                    
+                                                    return new ArrayList<>()
                                                 }
                                         )
                             }
