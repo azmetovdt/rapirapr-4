@@ -10,6 +10,7 @@ import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
+import akka.http.javadsl.model.ResponseEntity;
 import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
@@ -81,7 +82,7 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     System.out.println("Saving result");
-                    return HttpResponse.create().withEntity(request)
+                    return HttpResponse.create().withEntity((ResponseEntity) request);
                 });
     });
 
