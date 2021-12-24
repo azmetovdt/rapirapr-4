@@ -35,7 +35,7 @@ public class ResponseTimeApp {
         ActorMaterializer materializer = ActorMaterializer.create(system);
         ResponseTimeApp app = new ResponseTimeApp();
         final Http http = Http.get(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute(actor);
+        final Flow<HttpRequest, Object, NotUsed> routeFlow = createRoute(actor);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
@@ -46,7 +46,7 @@ public class ResponseTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
-    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor) {
+    private static Flow<HttpRequest, Object, NotUsed> createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
                     final Query query = request.getUri().query();
@@ -56,17 +56,16 @@ public class ResponseTimeApp {
                     );
                 })
                 .mapAsync(1, pair -> {
-                            CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
-                            savedResult.thenCompose(
-                                    result -> {
-                                        if (Collections.singletonList(result).toArray().length > 0) {
-                                            return CompletableFuture.completedFuture(result);
-                                        }
-                                        return null;
-                                    }
-                        }
-                )
-        return null;
+                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
+                    return savedResult.thenCompose(
+                            result -> {
+                                if (Collections.singletonList(result).toArray().length > 0) {
+                                    return CompletableFuture.completedFuture(result);
+                                }
+                                return null;
+                            }
+                    );
+                });
     });
 
 
