@@ -11,6 +11,7 @@ import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
+import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
@@ -48,7 +49,9 @@ public class ResponseTimeApp {
 
     private Route createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class).map(
-                return Pair<>()
+                (request) -> {
+                    return new Pair<>(request.)
+                }
                 get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
                     Future<Object> result = Patterns.ask(actor, id, 5000);
                     return completeOKWithFuture(result, Jackson.marshaller());
