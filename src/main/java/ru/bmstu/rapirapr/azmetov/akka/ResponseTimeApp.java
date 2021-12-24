@@ -76,7 +76,7 @@ public class ResponseTimeApp {
                                         .via(routeFlow)
                                         .toMat(Sink.fold(0, Integer::sum), Keep.right())
                                         .run(materializer)
-                                        .thenApply();
+                                        .thenApply(sum -> new Pair());
                             }
                     );
                 })
