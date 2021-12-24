@@ -21,7 +21,7 @@ import java.util.concurrent.CompletionStage;
 import static akka.http.javadsl.server.Directives.*;
 
 public class TesterApp {
-    public static final String ACTOR_SYSTEM_NAME = "TesterActorSystem";
+    public static final String ACTOR_SYSTEM_NAME = "ResponseTimeActorSystem";
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
