@@ -30,6 +30,7 @@ public class ResponseTimeApp {
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
     public static final String TESTING_STARTED_RESPONSE = "Тестирование запущено";
     public static final String PACKAGE_ID_PARAMETER_ALIAS = "packageId";
+    private static Object pair;
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
@@ -68,7 +69,7 @@ public class ResponseTimeApp {
                                         Flow.create().mapConcat(
                                                 pair -> {
                                                     return new ArrayList<>(
-                                                            Collections.nCopies()
+                                                            Collections.nCopies(pair)
                                                     )
                                                 }
                                         )
