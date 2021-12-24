@@ -57,7 +57,7 @@ public class ResponseTimeApp {
                 .mapAsync(1, pair -> {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     savedResult.thenCompose(
-                            savedResult -> {
+                            result -> {
                                 
                             }
                     )
