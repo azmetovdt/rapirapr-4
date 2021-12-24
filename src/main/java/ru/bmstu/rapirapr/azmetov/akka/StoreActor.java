@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StoreActor extends AbstractActor {
 
-    private final Map<String, List<TestResult>> testResultsMap = new HashMap<>();
+    private final Map<String, Number> testResultsMap = new HashMap<>();
 
     @Override
     public Receive createReceive() {
@@ -26,10 +26,7 @@ public class StoreActor extends AbstractActor {
 //        testResultsMap.get(id).add(result);
 //    }
 //
-    private List<TestResult> getProgramResults(String id) {
-        if (!testResultsMap.containsKey(id)) {
-            return new ArrayList<>();
-        }
-        return testResultsMap.get(id);
+    private Number getProgramResults(String id) {
+        return testResultsMap.getOrDefault(id, 0);
     }
 }
