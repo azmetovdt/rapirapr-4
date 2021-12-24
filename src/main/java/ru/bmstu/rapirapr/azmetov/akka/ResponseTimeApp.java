@@ -75,7 +75,7 @@ public class ResponseTimeApp {
                                 .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
                                 .mapAsync(pair.second(), url -> {
                                     System.out.println("Executing test");
-                                    long s
+                                    long start = System.currentTimeMillis()
                                     return CompletableFuture.completedFuture(0);
                                 });
                         return Source.single(pair)
