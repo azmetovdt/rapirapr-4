@@ -61,7 +61,7 @@ public class ResponseTimeApp {
                 })
                 .mapAsync(1, pair -> {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
-                    return savedResult.thenCompose(result -> {
+                    return savedResult.<CompletionStage<Pair>>thenCompose(result -> {
                                 if (Collections.singletonList(result).toArray().length > 0) {
                                     return CompletableFuture.completedFuture(result);
                                 }
