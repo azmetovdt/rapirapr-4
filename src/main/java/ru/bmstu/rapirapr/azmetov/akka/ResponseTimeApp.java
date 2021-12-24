@@ -70,7 +70,8 @@ public class ResponseTimeApp {
                                             System.out.println("Executing test");
                                             return CompletableFuture.completedFuture(0);
                                         });
-                                return new Source<>()
+                                return Source.from(Collections.singletonList(r))
+                                        .toMat(testSink, Keep.right()).run(materializer);
                             }
                     );
                 })
