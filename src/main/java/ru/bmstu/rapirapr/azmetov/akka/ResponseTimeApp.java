@@ -10,6 +10,7 @@ import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.model.Query;
 import akka.http.javadsl.server.Route;
 import akka.japi.Pair;
 import akka.pattern.Patterns;
@@ -50,8 +51,15 @@ public class ResponseTimeApp {
     private Route createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class).map(
                 (request) -> {
-                    final List<String> parameters = request.getUri().query().getAll();
-                    return new Pair<>(request.)
+                    final Query query = request.getUri().query();
+
+                    return new Pair<>(
+                            query.get("url"),
+                            Integer.parseInt(
+                                    String.valueOf(query.get("count"))
+                            )
+
+                    )
                 }
                 get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
                     Future<Object> result = Patterns.ask(actor, id, 5000);
