@@ -50,21 +50,15 @@ public class ResponseTimeApp {
 
     private static Flow<HttpRequest, Object, NotUsed> createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class)
-                .map(
-                request -> {
-
-                    final Query query = request.getUri().query();
-
-                    return new Pair<>(
-                            query.get("url"),
-                            Integer.parseInt(
-                                    String.valueOf(query.get("count"))
-                            )
-                    );
-                }
-        )
+                .map((request) -> {
+                        final Query query = request.getUri().query();
+                        return new Pair<String, Integer>(
+                                String.valueOf(query.get("url")),
+                                Integer.parseInt(String.valueOf(query.get("count")))
+                        );
+                    })
                 .mapAsync(request -> {
-                    CompletionStage<Object> = Patterns.ask(actor, new Message());
+                    CompletionStage<Object> = Patterns.ask(actor, new Message(request));
                 })
 
             }
