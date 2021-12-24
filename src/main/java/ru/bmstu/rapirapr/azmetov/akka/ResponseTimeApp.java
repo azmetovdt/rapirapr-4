@@ -55,7 +55,7 @@ public class ResponseTimeApp {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
                     final Query query = request.getUri().query();
-                    System.out.println(String.valueOf(query.get("url"));
+                    System.out.println(String.valueOf(query.get("url")));
 
                     return new Pair<String, Integer>(
                             String.valueOf(query.get("url")),
