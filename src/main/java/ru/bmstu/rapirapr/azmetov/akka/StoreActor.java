@@ -15,22 +15,21 @@ public class StoreActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(TestResult.class, testResult -> saveResults(testResult.getMessageTest().getPackageId(), testResult))
-                .match(String.class, id -> sender().tell(getProgramResults(id), self()))
+                .match(Message.class, id -> sender().tell(getProgramResults(id), self()))
                 .build();
     }
 
-    private void saveResults(String id, TestResult result) {
-        if (!testResultsMap.containsKey(id)) {
-            testResultsMap.put(id, new ArrayList<>());
-        }
-        testResultsMap.get(id).add(result);
-    }
-
-    private List<TestResult> getProgramResults(String id) {
-        if (!testResultsMap.containsKey(id)) {
-            return new ArrayList<>();
-        }
-        return testResultsMap.get(id);
-    }
+//    private void saveResults(String id, TestResult result) {
+//        if (!testResultsMap.containsKey(id)) {
+//            testResultsMap.put(id, new ArrayList<>());
+//        }
+//        testResultsMap.get(id).add(result);
+//    }
+//
+//    private List<TestResult> getProgramResults(String id) {
+//        if (!testResultsMap.containsKey(id)) {
+//            return new ArrayList<>();
+//        }
+//        return testResultsMap.get(id);
+//    }
 }
