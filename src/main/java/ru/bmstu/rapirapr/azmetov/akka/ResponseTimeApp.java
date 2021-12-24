@@ -79,8 +79,7 @@ public class ResponseTimeApp {
                                         .thenApply(sum -> new Pair(pair.first(), sum/pair.second()));
                             }
                     );
-                })
-        return null;
+                });
     });
 
 
