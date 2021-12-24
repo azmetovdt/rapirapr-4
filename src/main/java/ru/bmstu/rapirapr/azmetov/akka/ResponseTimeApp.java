@@ -58,10 +58,10 @@ public class ResponseTimeApp {
                     );
                 })
                 .mapAsync(1, pair -> {
-                    CompletionStage<List> savedResult = (CompletionStage<List>) Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
-                    savedResult.thenCompose(
+                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
+                    ((CompletionStage<List>)savedResult).thenCompose(
                             result -> {
-                                if (result.toArray().length > 0)
+                                if (result.t().length > 0)
                             }
                     )
                     return null;
