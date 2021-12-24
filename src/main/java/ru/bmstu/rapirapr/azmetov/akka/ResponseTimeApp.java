@@ -89,7 +89,7 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     actor.tell(new TestResult(request.first(), request.second()), ActorRef.noSender());
-                    System.out.println("Saving result");
+                    System.out.println("Saving result: " + request.first() + ' ' + request.second());
                     return HttpResponse.create().withEntity(request.toString());
                 });
     }
