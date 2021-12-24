@@ -73,7 +73,7 @@ public class ResponseTimeApp {
                                             return CompletableFuture.completedFuture(0);
                                         });
                                 return Source.single(pair).via(routeFlow)
-                                        .toMat(Sink.fold(0, Integer::sum), Keep.right()).run(materializer);
+                                        .toMat(Sink.fold(0, Integer::sum), Keep.right()).run(materializer).t;
                             }
                     );
                 })
