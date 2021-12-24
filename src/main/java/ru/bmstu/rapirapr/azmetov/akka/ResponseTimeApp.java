@@ -47,7 +47,7 @@ public class ResponseTimeApp {
     }
 
     private Route createRoute(ActorRef actor) {
-        return route(
+        return Flow.of(HttpRequest.class).map(
                 get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
                     Future<Object> result = Patterns.ask(actor, id, 5000);
                     return completeOKWithFuture(result, Jackson.marshaller());
