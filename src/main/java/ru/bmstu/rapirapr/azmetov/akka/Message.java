@@ -2,7 +2,7 @@ package ru.bmstu.rapirapr.azmetov.akka;
 
 
 public class Message {
-    private String url;
+    private final String url;
 
     public Message(String url) {
         this.url = url;
