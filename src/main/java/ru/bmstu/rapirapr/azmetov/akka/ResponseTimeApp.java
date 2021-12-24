@@ -61,8 +61,7 @@ public class ResponseTimeApp {
                 })
                 .mapAsync(1, pair -> {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
-                    return savedResult.thenCompose(
-                            result -> {
+                    return savedResult.thenCompose(result -> {
                                 if (Collections.singletonList(result).toArray().length > 0) {
                                     return CompletableFuture.completedFuture(result);
                                 }
@@ -77,8 +76,7 @@ public class ResponseTimeApp {
                                         .toMat(Sink.fold(0, Integer::sum), Keep.right())
                                         .run(materializer)
                                         .thenApply(sum -> new Pair(pair.first(), sum/pair.second()));
-                            }
-                    );
+                            });
                 });
     });
 
