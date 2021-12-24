@@ -55,11 +55,11 @@ public class ResponseTimeApp {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
                     final Query query = request.getUri().query();
-                    System.out.println(String.valueOf(query.get("url")));
+                    System.out.println(query.get("url").get());
 
                     return new Pair<String, Integer>(
-                            String.valueOf(query.get("url")),
-                            Integer.parseInt(String.valueOf(query.get("count")))
+                            query.get("url").get(),
+                            Integer.parseInt(query.get("count").get())
                     );
                 })
                 .mapAsync(1, pair -> {
