@@ -17,6 +17,7 @@ import akka.pattern.Patterns;
 import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.util.Timeout;
 
 import java.util.concurrent.CompletionStage;
 
@@ -56,7 +57,7 @@ public class ResponseTimeApp {
                         );
                     })
                 .mapAsync(1, pair -> {
-                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), new ); //actor, new Message(pair.first()), 5);
+                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), new Timeout()); //actor, new Message(pair.first()), 5);
                 })
 
             }
