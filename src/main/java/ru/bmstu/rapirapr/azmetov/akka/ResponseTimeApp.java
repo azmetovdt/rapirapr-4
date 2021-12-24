@@ -57,8 +57,8 @@ public class ResponseTimeApp {
                                 Integer.parseInt(String.valueOf(query.get("count")))
                         );
                     })
-                .mapAsync(request -> {
-                    CompletionStage<Object> = Patterns.ask(actor, new Message(request));
+                .mapAsync(pair -> {
+                    CompletionStage<Object> = Patterns.ask(actor, new Message(pair.f));
                 })
 
             }
