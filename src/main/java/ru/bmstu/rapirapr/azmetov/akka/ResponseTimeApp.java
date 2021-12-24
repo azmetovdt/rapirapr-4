@@ -17,6 +17,7 @@ import akka.stream.javadsl.Flow;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 
@@ -59,7 +60,7 @@ public class ResponseTimeApp {
                             savedResult.thenCompose(
                                     result -> {
                                         if (Collections.singletonList(result).toArray().length > 0) {
-                                            
+                                            return CompletableFuture
                                         }
                                     }
                         }
