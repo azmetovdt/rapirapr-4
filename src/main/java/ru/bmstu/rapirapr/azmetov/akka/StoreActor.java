@@ -27,6 +27,6 @@ public class StoreActor extends AbstractActor {
 //    }
 //
     private Number getProgramResults(String id) {
-        return testResultsMap.getOrDefault(id, 0);
+        return testResultsMap.getOrDefault(id, -1);
     }
 }
