@@ -82,7 +82,7 @@ public class ResponseTimeApp {
                     });
                 })
                 .map(request -> {
-                    actor.tell();
+                    actor.tell(new TestResult());
                     System.out.println("Saving result");
                     return HttpResponse.create().withEntity(request.toString());
                 });
