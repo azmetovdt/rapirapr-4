@@ -16,6 +16,9 @@ import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.time.Duration;
 import java.util.concurrent.CompletionStage;
 
@@ -58,7 +61,7 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     savedResult.thenCompose(
                             result -> {
-                                if ((List<TestResult> result.length > 0)
+                                if ((ArrayList<TestResult>)result. > 0)
                             }
                     )
                     return null;
