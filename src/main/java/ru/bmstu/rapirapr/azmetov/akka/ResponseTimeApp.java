@@ -79,7 +79,7 @@ public class ResponseTimeApp {
                                     long start = System.currentTimeMillis();
                                     asyncHttpClient().prepareGet(url).execute();
                                     long end = System.currentTimeMillis();
-                                    return CompletableFuture.completedFuture((Integer) (end-start));
+                                    return CompletableFuture.completedFuture((int) (end-start));
                                 });
                         return Source.single(pair)
                                 .via(routeFlow)
