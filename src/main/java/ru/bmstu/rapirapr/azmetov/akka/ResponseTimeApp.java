@@ -78,7 +78,7 @@ public class ResponseTimeApp {
                                     System.out.println("Executing test");
                                     long start = System.currentTimeMillis();
                                     asyncHttpClient().prepareGet(url).execute();
-                                    
+                                    long end = System.currentTimeMillis();
                                     return CompletableFuture.completedFuture(0);
                                 });
                         return Source.single(pair)
