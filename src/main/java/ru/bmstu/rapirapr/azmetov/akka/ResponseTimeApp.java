@@ -37,7 +37,7 @@ public class ResponseTimeApp {
         ActorMaterializer materializer = ActorMaterializer.create(system);
         ResponseTimeApp app = new ResponseTimeApp();
         final Http http = Http.get(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRo
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute()
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
@@ -48,7 +48,7 @@ public class ResponseTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
-    private Flow<HttpRequest, Object, NotUsed> createRoute(ActorRef actor) {
+    private static Flow<HttpRequest, Object, NotUsed> createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class)
                 .map(
                 (request) -> {
