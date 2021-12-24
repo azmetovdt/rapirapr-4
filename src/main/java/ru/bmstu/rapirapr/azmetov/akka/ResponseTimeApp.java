@@ -76,7 +76,7 @@ public class ResponseTimeApp {
                                 .mapAsync(pair.second(), url -> {
                                     System.out.println("Executing test");
                                     long start = System.currentTimeMillis();
-                                    
+                                    asyncHttpClient
                                     return CompletableFuture.completedFuture(0);
                                 });
                         return Source.single(pair)
