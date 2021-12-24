@@ -26,10 +26,10 @@ public class StoreActor extends AbstractActor {
 //        testResultsMap.get(id).add(result);
 //    }
 //
-//    private List<TestResult> getProgramResults(String id) {
-//        if (!testResultsMap.containsKey(id)) {
-//            return new ArrayList<>();
-//        }
-//        return testResultsMap.get(id);
-//    }
+    private List<TestResult> getProgramResults(String id) {
+        if (!testResultsMap.containsKey(id)) {
+            return new ArrayList<>();
+        }
+        return testResultsMap.get(id);
+    }
 }
