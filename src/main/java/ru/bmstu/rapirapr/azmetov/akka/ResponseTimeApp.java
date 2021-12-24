@@ -34,9 +34,13 @@ public class TesterApp {
         ActorRef actor = system.actorOf(Props.create(RouterActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
         TesterApp app = new TesterApp();
-        Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = app.createRoute(actor).flow(system, materializer);
-        Http http = Http.get(system);
-        CompletionStage<ServerBinding> binding = http.bindAndHandle(routeFlow, ConnectHttp.toHost(HTTP_HOST, HTTP_PORT), materializer);
+        final Http http = Http.get(system);
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = app.createRoute(actor).flow(system, materializer);
+        final CompletionStage<ServerBinding> binding = http.bindAndHandle(
+                routeFlow,
+                ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
+                materializer
+        );
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
