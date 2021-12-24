@@ -71,7 +71,7 @@ public class ResponseTimeApp {
                                             return CompletableFuture.completedFuture(0);
                                         });
                                 return Source.from(Collections.singletonList(r))
-                                        .toMat(Sink.fold(), Keep.right()).run(materializer);
+                                        .toMat(Sink.fold(0, Integer::sum), Keep.right()).run(materializer);
                             }
                     );
                 })
