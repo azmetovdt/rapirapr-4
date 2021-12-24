@@ -12,14 +12,11 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
 import akka.japi.Pair;
 import akka.pattern.Patterns;
-import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -60,16 +57,18 @@ public class ResponseTimeApp {
                     );
                 })
                 .mapAsync(1, pair -> {
-                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
-                    ((CompletionStage<List>)savedResult).thenCompose(
-                            result -> {
-                                result = Stream.of(result).map(Object::toString).collect(Collectors.toList());
-                                if (result.toArray().length > 0)
-                            }
-                    )
-                    return null;
-                });
+                            CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
+                            savedResult.thenCompose(
+                                    result -> {
+                                        List<Object> resul = Stream.of(result).map().collect(Collectors.toList());
+                                        if (resul.toArray().length > 0) {
+                                        }
+                                    }
+                        }
+                )
+        return null;
+    });
 
 
-    }
+}
 }
