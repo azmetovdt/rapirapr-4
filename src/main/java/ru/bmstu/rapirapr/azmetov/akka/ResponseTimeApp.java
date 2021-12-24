@@ -7,17 +7,14 @@ import akka.actor.Props;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
-import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
-import akka.http.javadsl.server.Route;
 import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import akka.util.Timeout;
 
 import java.time.Duration;
 import java.util.concurrent.CompletionStage;
@@ -51,15 +48,15 @@ public class ResponseTimeApp {
     private static Flow<HttpRequest, Object, NotUsed> createRoute(ActorRef actor) {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
-                        final Query query = request.getUri().query();
-                        return new Pair<String, Integer>(
-                                String.valueOf(query.get("url")),
-                                Integer.parseInt(String.valueOf(query.get("count")))
-                        );
-                    })
+                    final Query query = request.getUri().query();
+                    return new Pair<String, Integer>(
+                            String.valueOf(query.get("url")),
+                            Integer.parseInt(String.valueOf(query.get("count")))
+                    );
+                })
                 .mapAsync(1, pair -> {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                 })
 
-            }
+    }
 }
