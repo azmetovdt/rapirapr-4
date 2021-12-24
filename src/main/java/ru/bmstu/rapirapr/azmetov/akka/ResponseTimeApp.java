@@ -64,14 +64,13 @@ public class ResponseTimeApp {
                                 if (Collections.singletonList(result).toArray().length > 0) {
                                     return CompletableFuture.completedFuture(result);
                                 }
-                                final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                                        Flow.<Pair<String, Integer>>create().mapConcat(
-                                                _pair -> {
+                                final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
+                                                .mapConcat(_pair -> {
                                                     return new ArrayList<>(
                                                             Collections.nCopies(_pair.second(), _pair.first())
                                                     );
-                                                }
-                                        );
+                                                })
+                                        .mapAsync();
                             }
                     );
                 })
