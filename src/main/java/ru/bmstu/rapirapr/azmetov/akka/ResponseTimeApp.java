@@ -58,8 +58,7 @@ public class ResponseTimeApp {
                             Integer.parseInt(
                                     String.valueOf(query.get("count"))
                             )
-
-                    )
+                    );
                 }
                 get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
                     Future<Object> result = Patterns.ask(actor, id, 5000);
