@@ -68,7 +68,7 @@ public class ResponseTimeApp {
                         if (Collections.singletonList(result).toArray().length > 0) {
                             return CompletableFuture.completedFuture(new Pair<String, Integer>(
                                     pair.first(),
-                                    ( Integer)result
+                                    (Integer) result
                             ));
                         }
                         final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
