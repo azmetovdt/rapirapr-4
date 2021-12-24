@@ -58,7 +58,7 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     savedResult.thenCompose(
                             result -> {
-                                
+                                if ((List<TestResult> result.length > 0)
                             }
                     )
                     return null;
