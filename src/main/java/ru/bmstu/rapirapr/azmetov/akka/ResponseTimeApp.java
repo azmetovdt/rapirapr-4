@@ -12,11 +12,11 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
 import akka.http.javadsl.server.Route;
+import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.routing.RouterActor;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import javafx.util.Pair;
 
 import java.util.concurrent.CompletionStage;
 
@@ -55,8 +55,8 @@ public class ResponseTimeApp {
                                 Integer.parseInt(String.valueOf(query.get("count")))
                         );
                     })
-                .mapAsync(pair -> {
-                    CompletionStage<Object> = Patterns.ask(actor, new Message(pair));
+                .mapAsync(1, pair -> {
+                    CompletionStage<Object> = Patterns.ask(actor, new Message(pair.first()));
                 })
 
             }
