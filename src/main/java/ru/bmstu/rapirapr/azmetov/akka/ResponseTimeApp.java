@@ -21,6 +21,7 @@ import java.util.List;
 
 import java.time.Duration;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -62,8 +63,8 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     ((CompletionStage<List>)savedResult).thenCompose(
                             result -> {
-                                result = Stream.of(result).map(Object::toString).collect(Collectors.toList())
-                                if (result.t().length > 0)
+                                result = Stream.of(result).map(Object::toString).collect(Collectors.toList());
+                                if (result.toArray().length > 0)
                             }
                     )
                     return null;
