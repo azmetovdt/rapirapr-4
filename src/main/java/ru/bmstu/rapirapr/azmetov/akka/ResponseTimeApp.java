@@ -65,7 +65,7 @@ public class ResponseTimeApp {
                     System.out.println(pair);
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     return savedResult.thenCompose(result -> {
-                        if (Collections.singletonList(result).toArray().length > 0) {
+                        if (result >= 0) {
                             return CompletableFuture.completedFuture(new Pair<>(
                                     pair.first(),
                                     (Integer) result
