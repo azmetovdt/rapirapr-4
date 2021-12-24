@@ -66,7 +66,9 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     return savedResult.thenCompose(result -> {
                         if (Collections.singletonList(result).toArray().length > 0) {
-                            return CompletableFuture.completedFuture(result);
+                            return CompletableFuture.completedFuture(new Pair<>(
+                                    
+                            ));
                         }
                         final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
                                 .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
