@@ -61,7 +61,7 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     savedResult.thenCompose(
                             result -> {
-                                if ((ArrayList<TestResult>)result. > 0)
+                                if ((List<>) result.toArray().length > 0)
                             }
                     )
                     return null;
