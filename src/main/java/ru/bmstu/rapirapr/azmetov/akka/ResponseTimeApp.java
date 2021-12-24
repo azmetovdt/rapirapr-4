@@ -81,7 +81,7 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     System.out.println("Saving result");
-                    return HttpResponse.create().withEntity()
+                    return HttpResponse.create().withEntity(request)
                 });
     });
 
