@@ -81,7 +81,7 @@ public class ResponseTimeApp {
                                 .via(routeFlow)
                                 .toMat(Sink.fold(0, Integer::sum), Keep.right())
                                 .run(materializer)
-                                .thenApply(sum -> new Pair<String, Integer>(pair.first(), sum / pair.second()));
+                                .thenApply(sum -> new Pair<>(pair.first(), sum / pair.second()));
                     });
                 })
                 .map(request -> {
