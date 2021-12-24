@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static org.asynchttpclient.Dsl.asyncHttpClient;
 
 public class ResponseTimeApp {
     public static final String ACTOR_SYSTEM_NAME = "ResponseTimeActorSystem";
@@ -76,7 +77,7 @@ public class ResponseTimeApp {
                                 .mapAsync(pair.second(), url -> {
                                     System.out.println("Executing test");
                                     long start = System.currentTimeMillis();
-                                    asyncHttpClient
+                                    asyncHttpClient().
                                     return CompletableFuture.completedFuture(0);
                                 });
                         return Source.single(pair)
