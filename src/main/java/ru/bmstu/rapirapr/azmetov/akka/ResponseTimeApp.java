@@ -17,6 +17,7 @@ import akka.stream.javadsl.Flow;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -66,7 +67,9 @@ public class ResponseTimeApp {
                                 final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                                         Flow.create().mapConcat(
                                                 pair -> {
-                                                    return new ArrayList<>()
+                                                    return new ArrayList<>(
+                                                            Collections.nCopies()
+                                                    )
                                                 }
                                         )
                             }
