@@ -60,14 +60,7 @@ public class ResponseTimeApp {
                             )
                     );
                 }
-                get(() -> parameter(PACKAGE_ID_PARAMETER_ALIAS, id -> {
-                    Future<Object> result = Patterns.ask(actor, id, 5000);
-                    return completeOKWithFuture(result, Jackson.marshaller());
-                })),
-                post(() -> entity(Jackson.unmarshaller(Message.class), order -> {
-                    actor.tell(order, ActorRef.noSender());
-                    return complete(TESTING_STARTED_RESPONSE);
-                }))
-        );
-    }
+        )
+
+            }
 }
