@@ -5,8 +5,8 @@ public class TestResult {
     private final String status;
     private final String output;
 
-    public TestResult(MessageTest messageTest, String status, String output) {
-        this.messageTest = messageTest;
+    public TestResult(String url, String status, String output) {
+        this.url = messageTest;
         this.status = status;
         this.output = output;
     }
