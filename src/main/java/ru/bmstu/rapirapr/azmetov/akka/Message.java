@@ -1,3 +1,6 @@
+package ru.bmstu.rapirapr.azmetov.akka;
+
+
 public class Message {
     private String url;
 

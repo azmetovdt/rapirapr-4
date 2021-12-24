@@ -21,7 +21,7 @@ import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
-public class TesterApp {
+public class ResponseTimeApp {
     public static final String ACTOR_SYSTEM_NAME = "ResponseTimeActorSystem";
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";
@@ -33,7 +33,7 @@ public class TesterApp {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(RouterActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
-        TesterApp app = new TesterApp();
+        ResponseTimeApp app = new ResponseTimeApp();
         final Http http = Http.get(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = app.createRoute(actor).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
