@@ -62,7 +62,7 @@ public class ResponseTimeApp {
                                 if (Collections.singletonList(result).toArray().length > 0) {
                                     return CompletableFuture.completedFuture(result);
                                 }
-                                return new Flow<>
+                                final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                             }
                     );
                 })
