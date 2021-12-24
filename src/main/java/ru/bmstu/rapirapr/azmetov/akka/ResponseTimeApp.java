@@ -14,11 +14,9 @@ import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import scala.Int;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -66,7 +64,7 @@ public class ResponseTimeApp {
                                     return CompletableFuture.completedFuture(result);
                                 }
                                 final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
-                                                .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
+                                        .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
                                         .mapAsync(pair.second(), url -> {
                                             System.out.println("Executing test");
                                             return CompletableFuture.completedFuture(0);
