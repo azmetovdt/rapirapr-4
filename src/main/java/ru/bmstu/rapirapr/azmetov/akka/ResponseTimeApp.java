@@ -18,7 +18,6 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
-import io.netty.handler.codec.http.HttpScheme;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -64,28 +63,25 @@ public class ResponseTimeApp {
                 .mapAsync(1, pair -> {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(""), Duration.ofSeconds(5));
                     return savedResult.thenCompose(result -> {
-                                if (Collections.singletonList(result).toArray().length > 0) {
-                                    return CompletableFuture.completedFuture(result);
-                                }
-                                final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
-                                        .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
-                                        .mapAsync(pair.second(), url -> {
-                                            System.out.println("Executing test");
-                                            return CompletableFuture.completedFuture(0);
-                                        });
-                                return Source.single(pair)
-                                        .via(routeFlow)
-                                        .toMat(Sink.fold(0, Integer::sum), Keep.right())
-                                        .run(materializer)
-                                        .thenApply(sum -> new Pair(pair.first(), sum/pair.second()));
-                            });
+                        if (Collections.singletonList(result).toArray().length > 0) {
+                            return CompletableFuture.completedFuture(result);
+                        }
+                        final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
+                                .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
+                                .mapAsync(pair.second(), url -> {
+                                    System.out.println("Executing test");
+                                    return CompletableFuture.completedFuture(0);
+                                });
+                        return Source.single(pair)
+                                .via(routeFlow)
+                                .toMat(Sink.fold(0, Integer::sum), Keep.right())
+                                .run(materializer)
+                                .thenApply(sum -> new Pair(pair.first(), sum / pair.second()));
+                    });
                 })
                 .map(request -> {
                     System.out.println("Saving result");
                     return HttpResponse.create().withEntity((ResponseEntity) request);
                 });
-    });
-
-
-}
+    }
 }
