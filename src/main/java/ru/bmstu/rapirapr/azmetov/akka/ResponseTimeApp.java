@@ -72,7 +72,8 @@ public class ResponseTimeApp {
                                             System.out.println("Executing test");
                                             return CompletableFuture.completedFuture(0);
                                         });
-                                return Source.single(pair).via(routeFlow)
+                                return Source.single(pair)
+                                        .via(routeFlow)
                                         .toMat(Sink.fold(0, Integer::sum), Keep.right()).run(materializer);
                             }
                     );
