@@ -49,7 +49,8 @@ public class ResponseTimeApp {
     }
 
     private Route createRoute(ActorRef actor) {
-        return Flow.of(HttpRequest.class).map(
+        return Flow.of(HttpRequest.class)
+                .map(
                 (request) -> {
                     final Query query = request.getUri().query();
 
