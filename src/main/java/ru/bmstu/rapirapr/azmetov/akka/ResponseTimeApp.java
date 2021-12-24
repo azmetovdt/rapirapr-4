@@ -67,7 +67,7 @@ public class ResponseTimeApp {
                                 final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                                         Flow.<Pair<String, Integer>>create().mapConcat(
                                                 pair -> {
-                                                    return new ArrayList<Pair<>>(
+                                                    return new ArrayList<>(
                                                             Collections.nCopies(pair.second(), pair.first())
                                                     )
                                                 }
