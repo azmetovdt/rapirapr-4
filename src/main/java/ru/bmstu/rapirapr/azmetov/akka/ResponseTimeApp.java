@@ -81,7 +81,7 @@ public class ResponseTimeApp {
                                 .thenApply(sum -> new Pair(pair.first(), sum / pair.second()));
                     });
                 })
-                .map request -> {
+                .map(request -> {
                     actor.tell(new TestResult(request));
                     System.out.println("Saving result");
                     return HttpResponse.create().withEntity(request.toString());
