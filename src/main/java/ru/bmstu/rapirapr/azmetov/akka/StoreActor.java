@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class StoreActor extends AbstractActor {
 
-    private final List<String> hosts = new ArrayList<>();
+    private List<String> hosts = new ArrayList<>();
 
     @Override
     public Receive createReceive() {
@@ -17,7 +17,7 @@ public class StoreActor extends AbstractActor {
                 .match(RandomHostMessage.class, m -> {
                     sender().tell(new HostMessage(getRandomHost()), getSelf());
                 })
-                .match(SaveHostsMessage.class)
+                .match(SaveHostsMessage.class, this::saveHosts)
                 .match(SaveHostMessage.class, this::saveHost)
                 .build();
     }
