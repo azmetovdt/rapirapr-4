@@ -23,7 +23,7 @@ public class ZookeeperController {
     }
 
     public void addNode(String host, String path, CreateMode mode) {
-        zoo.create(path, host.getBytes(StandardCharsets.UTF_8))
+        zoo.create(path, host.getBytes(StandardCharsets.UTF_8), zoo)
     }
     public void watchNodes() {
         try {
