@@ -60,7 +60,7 @@ public class ResponseTimeApp {
                                                 return fetch(
                                                         http,
                                                         m.getHost() + url + "/" + count.toString()
-                                                )
+                                                );
                                             })
                             );
                         })
