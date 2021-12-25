@@ -33,7 +33,7 @@ public class ZookeeperController {
             }
             actor.tell(new SaveHostsMessage(hosts), ActorRef.noSender());
         } catch (KeeperException | InterruptedException e) {
-            System.out.println();
-        })
+            System.out.println(e.toString());
+        }
     }
 }
