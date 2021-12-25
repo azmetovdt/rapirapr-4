@@ -19,7 +19,7 @@ import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
-public class ZookeeperApp {
+public class AnonymizerApp {
     public static final String ACTOR_SYSTEM_NAME = "ZookeeperActorSystem";
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";

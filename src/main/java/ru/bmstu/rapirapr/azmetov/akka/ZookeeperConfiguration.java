@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ZookeeperController {
+public class ZookeeperConfiguration {
     private ZooKeeper zoo;
     private ActorRef actor;
 
@@ -18,7 +18,7 @@ public class ZookeeperController {
     public static final String UPDATE_LOG_MESSAGE = "Список нод изменилсяо: ";
     public static final Integer ZOO_TIMEOUT = 5000;
 
-    public ZookeeperController(String host, ActorRef actor) throws IOException {
+    public ZookeeperConfiguration(String host, ActorRef actor) throws IOException {
         this.actor = actor;
         this.zoo = new ZooKeeper(host, ZOO_TIMEOUT, watchedEvent -> {
             System.out.println(watchedEvent.getState());
