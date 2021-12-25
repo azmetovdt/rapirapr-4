@@ -30,7 +30,7 @@ public class ZookeeperController {
                         Arrays.toString(zoo.getData("" + "/" + node, false, null))
                 );
             }
-            actor.tell(new SaveHostsMessage(hosts), );
+            actor.tell(new SaveHostsMessage(hosts), ActorRef.noSender());
         })
     }
 }
