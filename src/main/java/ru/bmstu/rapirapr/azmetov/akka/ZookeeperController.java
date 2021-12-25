@@ -6,6 +6,7 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ZookeeperController {
     }
 
     public void addNode(String host, String path, CreateMode mode) {
-        zoo.create(path, ho)
+        zoo.create(path, host.getBytes(StandardCharsets.UTF_8))
     }
     public void watchNodes() {
         try {
