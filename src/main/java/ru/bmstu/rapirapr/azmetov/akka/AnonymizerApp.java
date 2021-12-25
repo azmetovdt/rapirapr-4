@@ -21,18 +21,15 @@ import static akka.http.javadsl.server.Directives.*;
 
 public class AnonymizerApp {
     public static final String ACTOR_SYSTEM_NAME = "ZookeeperActorSystem";
+    public static final Integer HTTP_PORT = 8080;
+    public static final String HTTP_HOST = "localhost";
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
     public static final String URL_QUERY_PARAMETER_ALIAS = "url";
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
     public static final String ZOOKEEPER_HOST = "localhost:2181";
-    public static final String DEFAULT_HOST = "localhost";
-    public static final Integer DEFAULT_PORT = 8080;
 
 
     public static void main(String[] args) throws Exception {
-        String host = DEFAULT_HOST;
-        Integer port = DEFAULT_PORT;
-
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
