@@ -1,7 +1,7 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 
-public class Message {
+public class RandomHostMessage {
     private final String url;
 
     public Message(String url) {
