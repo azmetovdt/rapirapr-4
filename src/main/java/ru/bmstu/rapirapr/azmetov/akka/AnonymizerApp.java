@@ -64,7 +64,7 @@ public class AnonymizerApp {
                 )));
     }
 
-    private static joinUrl(String host, Integer port) {
+    private String joinUrl(String host, Integer port) {
         return "http://" + host + port;
     }
 
