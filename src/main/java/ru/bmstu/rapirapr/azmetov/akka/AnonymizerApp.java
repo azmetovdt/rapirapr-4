@@ -33,7 +33,7 @@ public class AnonymizerApp {
 
     public static void main(String[] args) throws Exception {
         String host = DEFAULT_HOST;
-        String port = DEFAULT_PORT;
+        Integer port = DEFAULT_PORT;
 
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
