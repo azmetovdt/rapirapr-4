@@ -57,7 +57,9 @@ public class ResponseTimeApp {
                                     Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
                                             .thenCompose(msg -> {
                                                 HostMessage m = (HostMessage) msg;
-                                                return fetch()
+                                                return fetch(
+                                                        m.ge
+                                                )
                                             })
                             );
                         })
