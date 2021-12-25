@@ -54,7 +54,7 @@ public class ResponseTimeApp {
                                 return completeWithFuture(fetch(http, url));
                             }
                             return completeWithFuture(
-                                    Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds())
+                                    Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
                             );
                         })
                 )));
