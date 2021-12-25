@@ -8,6 +8,6 @@ public class ZookeeperController {
     private ActorRef actor;
 
     public ZookeeperController(String host, ActorRef actor) {
-        
+        this.actor = actor;
     }
 }
