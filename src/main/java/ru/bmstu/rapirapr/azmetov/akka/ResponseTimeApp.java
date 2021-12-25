@@ -9,6 +9,7 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
@@ -43,7 +44,7 @@ public class ResponseTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
-    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, Http http) {
+    private static Route createRoute(ActorRef actor, Http http) {
         return route(
                 get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, url ->
                         parameter(COUNT_QUERY_PARAMETER_ALIAS, count -> {
