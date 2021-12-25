@@ -38,7 +38,6 @@ public class ResponseTimeApp {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
-        ResponseTimeApp app = new ResponseTimeApp();
         final Http http = Http.get(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute(actor, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
