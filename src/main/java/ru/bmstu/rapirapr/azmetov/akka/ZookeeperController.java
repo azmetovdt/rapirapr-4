@@ -19,7 +19,7 @@ public class ZookeeperController {
         zoo.close();
     }
 
-    public void addNode(String host, String path, CreateMode mode) {
+    public void addNode(String host, String path, CreateMode mode) throws InterruptedException, KeeperException {
         zoo.create(path, host.getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, mode);
     }
     public void watchNodes() {
