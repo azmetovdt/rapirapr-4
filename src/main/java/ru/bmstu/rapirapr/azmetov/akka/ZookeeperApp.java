@@ -19,8 +19,8 @@ import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
-public class ResponseTimeApp {
-    public static final String ACTOR_SYSTEM_NAME = "ResponseTimeActorSystem";
+public class ZookeperApp {
+    public static final String ACTOR_SYSTEM_NAME = "ZookeperActorSystem";
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
