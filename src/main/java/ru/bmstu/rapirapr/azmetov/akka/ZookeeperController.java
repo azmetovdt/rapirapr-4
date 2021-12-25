@@ -39,9 +39,10 @@ public class ZookeeperController {
                     watchNodes();
                 }
             });
-
+            System.out
             List<String> hosts = new ArrayList<>();
             for (String node : nodes) {
+                System.out.println(node);
                 hosts.add(
                         Arrays.toString(zoo.getData(NODE_ROOT_PATH + "/" + node, false, null))
                 );
