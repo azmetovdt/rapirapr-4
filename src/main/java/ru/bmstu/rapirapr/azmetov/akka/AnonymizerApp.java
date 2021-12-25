@@ -64,7 +64,9 @@ public class AnonymizerApp {
                 )));
     }
 
-    private static joinUrl()
+    private static joinUrl(String host, Integer port) {
+        return;
+    }
 
     private static CompletionStage<HttpResponse> fetch(Http http, String url) {
         return http.singleRequest(HttpRequest.create(url));
