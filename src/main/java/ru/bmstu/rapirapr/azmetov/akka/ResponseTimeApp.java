@@ -85,6 +85,7 @@ public class ResponseTimeApp {
                     });
                 })
                 .map(request -> {
+                    if (request.)
                     actor.tell(request, ActorRef.noSender());
                     return HttpResponse.create().withEntity(request.toString());
                 });
