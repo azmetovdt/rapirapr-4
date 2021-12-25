@@ -31,8 +31,8 @@ public class ResponseTimeApp {
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
-    public static final String TESTING_STARTED_RESPONSE = "Тестирование запущено";
-    public static final String PACKAGE_ID_PARAMETER_ALIAS = "packageId";
+    public static final String URL_QUERY_PARAMETER_ALIAS = "url";
+    public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
@@ -54,10 +54,9 @@ public class ResponseTimeApp {
         return Flow.of(HttpRequest.class)
                 .map((request) -> {
                     final Query query = request.getUri().query();
-                    System.out.println(query.get("url").get());
-                    return new Pair<String, Integer>(
-                            query.get("url").get(),
-                            Integer.parseInt(query.get("count").get())
+                    return new Pair<>(
+                            query.get(URL_QUERY_PARAMETER_ALIAS).get(),
+                            Integer.parseInt(query.get(COUNT_QUERY_PARAMETER_ALIAS).get())
                     );
                 })
                 .mapAsync(1, pair -> {
@@ -73,11 +72,9 @@ public class ResponseTimeApp {
                         final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
                                 .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
                                 .mapAsync(pair.second(), url -> {
-                                    System.out.println("Executing test");
                                     long start = System.currentTimeMillis();
                                     asyncHttpClient().prepareGet(url).execute();
                                     long end = System.currentTimeMillis();
-                                    System.out.println((int) (end - start));
                                     return CompletableFuture.completedFuture((int) (end - start));
                                 });
                         return Source.single(pair)
@@ -89,7 +86,6 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     actor.tell(new TestResult(request.first(), request.second()), ActorRef.noSender());
-                    System.out.println("Saving result: " + request.first() + ' ' + request.second());
                     return HttpResponse.create().withEntity(request.toString());
                 });
     }
