@@ -19,14 +19,13 @@ import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
-public class ZookeperApp {
-    public static final String ACTOR_SYSTEM_NAME = "ZookeperActorSystem";
+public class ZookeeperApp {
+    public static final String ACTOR_SYSTEM_NAME = "ZookeeperActorSystem";
     public static final Integer HTTP_PORT = 8080;
     public static final String HTTP_HOST = "localhost";
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
     public static final String URL_QUERY_PARAMETER_ALIAS = "url";
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
-    public static final String HTTP_RESPONSE_PREFIX = "Среднее время ответа: ";
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
@@ -55,7 +54,7 @@ public class ZookeperApp {
                                     Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
                                             .thenCompose(msg -> {
                                                 HostMessage m = (HostMessage) msg;
-                                                return fetch(http, m.getHost() + url + "/" + count.toString());
+                                                return fetch(http, m.getHost() + url + "/" + count);
                                             })
                             );
                         })
