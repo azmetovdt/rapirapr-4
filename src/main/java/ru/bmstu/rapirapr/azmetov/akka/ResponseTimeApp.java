@@ -47,9 +47,10 @@ public class ResponseTimeApp {
         return route(
                 get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, url ->
                         parameter(COUNT_QUERY_PARAMETER_ALIAS, count -> {
-                            if(Integer.parseInt(count) > 0)
-                            Future<Object> result = Patterns.ask(actor, url, 5000);
-                            return completeOKWithFuture(fetch(http, url));
+                            if(Integer.parseInt(count) > 0) {
+                                Future<Object> result = Patterns.ask(actor, url, 5000);
+                                return completeOKWithFuture(fetch(http, url));
+                            }
                         })
                 )));
     }
