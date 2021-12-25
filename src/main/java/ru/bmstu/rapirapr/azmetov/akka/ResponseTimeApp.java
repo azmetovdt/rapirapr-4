@@ -87,9 +87,9 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     if (request.getIsNew()) {
-                        actor.tell(HTTP_RESPONSE_PREFIX + request.getTime(), ActorRef.noSender());
+                        actor.tell(request, ActorRef.noSender());
                     }
-                    return HttpResponse.create().withEntity(request.toString());
+                    return HttpResponse.create().withEntity(HTTP_RESPONSE_PREFIX + request.getTime());
                 });
     }
 }
