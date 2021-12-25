@@ -3,10 +3,7 @@ package ru.bmstu.rapirapr.azmetov.akka;
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StoreActor extends AbstractActor {
 
@@ -26,7 +23,7 @@ public class StoreActor extends AbstractActor {
     }
 
     private void getRandomHost() {
-        return hosts
+        return hosts[new Random().nextInt()]
     }
 
     private Number getProgramResults(String id) {
