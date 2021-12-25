@@ -13,13 +13,12 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(RandomHostMessage.class, m -> { sender().tell(new HostMessage(getRandomHost()), getSelf()); })
-                .match(TestResult.class, this::saveResults)
+                .match(SaveHostMessage.class, this::saveResults)
                 .build();
     }
 
-    private void saveResults(TestResult result) {
-        System.out.println("saving: " + result.toString());
-        testResultsMap.put(result.getUrl(), result.getTime());
+    private void saveResults(SaveHostMessage m) {
+        hosts.add(m.getHost());
     }
 
     private String getRandomHost() {
