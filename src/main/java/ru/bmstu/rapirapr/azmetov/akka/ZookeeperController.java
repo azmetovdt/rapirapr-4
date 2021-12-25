@@ -18,6 +18,7 @@ public class ZookeeperController {
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
     }
+
     public void close() throws InterruptedException {
         zoo.close();
     }
@@ -29,6 +30,7 @@ public class ZookeeperController {
     public void addServerNode(String host) throws InterruptedException, KeeperException {
         addNode(host, NODE_ROOT_PATH + NODE_SERVER_PATH, CreateMode.EPHEMERAL_SEQUENTIAL);
     }
+
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren(NODE_ROOT_PATH, watchedEvent -> {
