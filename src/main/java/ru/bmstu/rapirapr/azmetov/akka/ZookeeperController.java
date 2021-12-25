@@ -18,19 +18,21 @@ public class ZookeeperController {
     }
 
     public void watchNodes() throws InterruptedException, KeeperException {
-        List<String> nodes = zoo.getChildren("", watchedEvent -> {
-                    if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                        watchNodes();
-                    }
-                });
+        try {
+            List<String> nodes = zoo.getChildren("", watchedEvent -> {
+                if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
+                    watchNodes();
+                }
+            });
 
             List<String> hosts = new ArrayList<>();
-            for (String node: nodes) {
+            for (String node : nodes) {
                 hosts.add(
                         Arrays.toString(zoo.getData("" + "/" + node, false, null))
                 );
             }
             actor.tell(new SaveHostsMessage(hosts), ActorRef.noSender());
+        } catch ()
         })
     }
 }
