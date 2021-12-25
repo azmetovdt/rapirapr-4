@@ -14,7 +14,7 @@ public class ZookeeperController {
 
     public static final String NODE_ROOT_PATH = "/s";
     public static final String NODE_SERVER_PATH = "/server";
-    public static final String UPDATE_LOG_MESSAGE = "Список нод изменился"
+    public static final String UPDATE_LOG_MESSAGE = "Список нод изменилсяо: ";
 
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
