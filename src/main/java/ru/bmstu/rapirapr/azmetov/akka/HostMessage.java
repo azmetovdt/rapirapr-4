@@ -1,6 +1,5 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
-
 public class HostMessage {
     private static String host;
 
@@ -8,7 +7,7 @@ public class HostMessage {
         this.host = host;
     }
 
-    public static String getHost() {
+    public String getHost() {
         return host;
     }
 }
