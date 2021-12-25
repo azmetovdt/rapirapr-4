@@ -65,7 +65,7 @@ public class AnonymizerApp {
     }
 
     private static joinUrl(String host, Integer port) {
-        return;
+        return "http://"
     }
 
     private static CompletionStage<HttpResponse> fetch(Http http, String url) {
