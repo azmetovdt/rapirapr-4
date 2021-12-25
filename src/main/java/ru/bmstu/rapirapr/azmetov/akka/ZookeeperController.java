@@ -22,9 +22,7 @@ public class ZookeeperController {
     }
 
     public void addNode(String host, String path, CreateMode mode) {
-        zoo.create(
-                
-        )
+        zoo.create(path, ho)
     }
     public void watchNodes() {
         try {
