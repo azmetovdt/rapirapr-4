@@ -12,8 +12,8 @@ public class ZookeeperController {
     private ZooKeeper zoo;
     private ActorRef actor;
 
-    public static final String NODE_ROOT_PATH = "/ser";
-    public static final String NODE_SERVER_PATH = "";
+    public static final String NODE_ROOT_PATH = "/s";
+    public static final String NODE_SERVER_PATH = "/server";
 
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
