@@ -19,6 +19,8 @@ public class ZookeeperController {
     public void close() throws InterruptedException {
         zoo.close();
     }
+
+    public 
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
