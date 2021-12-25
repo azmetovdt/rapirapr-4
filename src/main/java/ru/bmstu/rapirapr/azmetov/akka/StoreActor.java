@@ -26,7 +26,7 @@ public class StoreActor extends AbstractActor {
     }
 
     private void getRandomHost() {
-        
+        return 
     }
 
     private Number getProgramResults(String id) {
