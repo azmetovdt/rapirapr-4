@@ -16,8 +16,8 @@ public class ZookeeperController {
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
     }
-    public close() {
-        
+    public void close() throws InterruptedException {
+        zoo.close();
     }
     public void watchNodes() {
         try {
