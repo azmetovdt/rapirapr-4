@@ -32,6 +32,8 @@ public class AnonymizerApp {
 
 
     public static void main(String[] args) throws Exception {
+        String host = DEFAULT_HOST;
+        String po
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
