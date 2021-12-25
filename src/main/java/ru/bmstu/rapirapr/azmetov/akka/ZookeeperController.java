@@ -20,7 +20,13 @@ public class ZookeeperController {
     public void watchNodes() throws InterruptedException, KeeperException {
         List<String> nodes = zoo.getChildren("", watchedEvent -> {
                     if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                        watchNodes();
+                        try {
+                            watchNodes();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (KeeperException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
