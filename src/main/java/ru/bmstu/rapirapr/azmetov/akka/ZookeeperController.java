@@ -7,5 +7,5 @@ public class ZookeeperController {
     private ZooKeeper zoo;
     private ActorRef actor;
 
-    public ZookeeperController()
+    public ZookeeperController(String host,)
 }
