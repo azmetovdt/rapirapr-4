@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class StoreActor extends AbstractActor {
 
-    private final Map<String, Number> testResultsMap = new HashMap<>();
+    private final String hosts = new HashMap<>();
 
     @Override
     public Receive createReceive() {
