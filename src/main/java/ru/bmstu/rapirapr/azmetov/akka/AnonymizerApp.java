@@ -40,7 +40,7 @@ public class AnonymizerApp {
                 materializer
         );
         final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor);
-        controller.addServerNode();
+        controller.addServerNode(joinUrl());
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
