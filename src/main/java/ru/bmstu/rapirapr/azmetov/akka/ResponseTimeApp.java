@@ -57,7 +57,7 @@ public class ResponseTimeApp {
                     final Query query = request.getUri().query();
                     return new Pair<>(
                             query.get(URL_QUERY_PARAMETER_ALIAS).get(),
-                            Integer.parseInt(query.get(COUNT_QUERY_PARAMETER_ALIAS).get(),)
+                            Integer.parseInt(query.get(COUNT_QUERY_PARAMETER_ALIAS).get())
                     );
                 })
                 .mapAsync(1, pair -> {
