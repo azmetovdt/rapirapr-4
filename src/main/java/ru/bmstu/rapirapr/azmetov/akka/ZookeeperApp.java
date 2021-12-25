@@ -32,12 +32,13 @@ public class ZookeeperApp {
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
         final Http http = Http.get(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute(actor, http).flow(system, materializer);
+        final Flow<HttpRequest, HttpResponse, NotUsed> route = createRoute(actor, http).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
-                routeFlow,
+                route,
                 ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
                 materializer
         );
+        
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
