@@ -52,44 +52,6 @@ public class ResponseTimeApp {
     }
 
     private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, ActorMaterializer materializer) {
-        return Flow.of(HttpRequest.class)
-                .map((request) -> {
-                    final Query query = request.getUri().query();
-                    return new Pair<>(
-                            query.get(URL_QUERY_PARAMETER_ALIAS).get(),
-                            Integer.parseInt(query.get(COUNT_QUERY_PARAMETER_ALIAS).get())
-                    );
-                })
-                .mapAsync(1, pair -> {
-                    System.out.println(pair);
-                    CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(pair.first()), Duration.ofSeconds(5));
-                    return savedResult.thenCompose(result -> {
-                        if ((Integer) result >= 0) {
-                            return CompletableFuture.completedFuture(new TestResult(
-                                    pair.first(),
-                                    (Integer) result
-                            ));
-                        }
-                        final Flow<Pair<String, Integer>, Integer, NotUsed> routeFlow = Flow.<Pair<String, Integer>>create()
-                                .mapConcat(_pair -> new ArrayList<>(Collections.nCopies(_pair.second(), _pair.first())))
-                                .mapAsync(pair.second(), url -> {
-                                    long start = System.currentTimeMillis();
-                                    asyncHttpClient().prepareGet(url).execute();
-                                    long end = System.currentTimeMillis();
-                                    return CompletableFuture.completedFuture((int) (end - start));
-                                });
-                        return Source.single(pair)
-                                .via(routeFlow)
-                                .toMat(Sink.fold(0, Integer::sum), Keep.right())
-                                .run(materializer)
-                                .thenApply(sum -> new TestResult(pair.first(), sum / pair.second(), true));
-                    });
-                })
-                .map(request -> {
-                    if (request.getIsNew()) {
-                        actor.tell(request, ActorRef.noSender());
-                    }
-                    return HttpResponse.create().withEntity(HTTP_RESPONSE_PREFIX + request.getTime());
-                });
+       
     }
 }
