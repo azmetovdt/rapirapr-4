@@ -19,7 +19,9 @@ public class ZookeeperController {
 
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
-        this.zoo = new ZooKeeper(host, ZOO_TIMEOUT,)
+        this.zoo = new ZooKeeper(host, ZOO_TIMEOUT, watchedEvent -> {
+            
+        })
     }
 
     public void close() throws InterruptedException {
