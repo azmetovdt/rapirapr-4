@@ -23,7 +23,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Future;
 
+import static akka.http.javadsl.server.Directives.get;
+import static akka.http.javadsl.server.Directives.route;
 import static org.asynchttpclient.Dsl.asyncHttpClient;
 
 public class ResponseTimeApp {
@@ -52,6 +55,11 @@ public class ResponseTimeApp {
     }
 
     private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, ActorMaterializer materializer) {
-       
+        return route(
+                get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, id -> {
+                    Future<Object> result = Patterns.ask(actor, id, 5000);
+                    return completeOKWithFuture(result, Jackson.marshaller());
+                })),
+        );
     }
 }
