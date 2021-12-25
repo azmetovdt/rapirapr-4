@@ -28,6 +28,7 @@ public class AnonymizerApp {
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
     public static final String ZOOKEEPER_HOST = "localhost:2181";
 
+
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
