@@ -52,14 +52,14 @@ public class AnonymizerApp {
         return route(
                 get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, url ->
                         parameter(COUNT_QUERY_PARAMETER_ALIAS, count -> {
-                            if (Integer.parseInt(count) > 0) {
+                            if (Integer.parseInt(count) == 0) {
                                 return completeWithFuture(fetch(http, url));
                             }
                             return completeWithFuture(
                                     Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
                                             .thenCompose(msg -> {
                                                 HostMessage m = (HostMessage) msg;
-                                                return fetch(http, m.getHost() + url + "/" + count);
+                                                return fetch(http, m.getHost() + url + "/" + (Integer.parseInt(count)-1));
                                             })
                             );
                         })
