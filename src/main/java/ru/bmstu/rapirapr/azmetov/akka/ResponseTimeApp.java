@@ -33,6 +33,7 @@ public class ResponseTimeApp {
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
     public static final String URL_QUERY_PARAMETER_ALIAS = "url";
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
+    public static final String HTTP_RESPONSE_PREFIX = "Среднее время ответа ";
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
@@ -86,7 +87,7 @@ public class ResponseTimeApp {
                 })
                 .map(request -> {
                     if (request.getIsNew()) {
-                        actor.tell(request, ActorRef.noSender());
+                        actor.tell(HTTP_RESPONSE_PREFIX + request.getTime(), ActorRef.noSender());
                     }
                     return HttpResponse.create().withEntity(request.toString());
                 });
