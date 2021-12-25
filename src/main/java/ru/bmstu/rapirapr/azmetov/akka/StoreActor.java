@@ -23,7 +23,7 @@ public class StoreActor extends AbstractActor {
     }
 
     private void getRandomHost() {
-        return hosts[new Random().nextInt()]
+        return hosts[new Random().nextInt(hosts.toArray().length)]
     }
 
     private Number getProgramResults(String id) {
