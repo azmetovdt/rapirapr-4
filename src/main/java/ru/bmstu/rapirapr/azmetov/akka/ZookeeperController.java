@@ -20,7 +20,7 @@ public class ZookeeperController {
         zoo.close();
     }
 
-    public void addNode
+    public void addNode(String host)
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
