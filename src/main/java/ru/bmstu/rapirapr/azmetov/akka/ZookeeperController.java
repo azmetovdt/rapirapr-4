@@ -16,7 +16,9 @@ public class ZookeeperController {
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
     }
-
+    public close() {
+        
+    }
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
