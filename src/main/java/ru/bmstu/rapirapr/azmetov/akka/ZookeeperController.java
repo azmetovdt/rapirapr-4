@@ -23,7 +23,7 @@ public class ZookeeperController {
         zoo.create(path, host.getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, mode);
     }
 
-    public void addServerNode
+    public void addServerNode(String host)
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
