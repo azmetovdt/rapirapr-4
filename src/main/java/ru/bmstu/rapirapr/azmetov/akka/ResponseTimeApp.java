@@ -15,6 +15,7 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import scala.concurrent.Future;
 
+import java.time.Duration;
 import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
@@ -53,7 +54,7 @@ public class ResponseTimeApp {
                                 return completeWithFuture(fetch(http, url));
                             }
                             return completeWithFuture(
-                                    Patterns.ask(actor, new RandomHostMessage())
+                                    Patterns.ask(actor, new RandomHostMessage(), Duration.of)
                             );
                         })
                 )));
