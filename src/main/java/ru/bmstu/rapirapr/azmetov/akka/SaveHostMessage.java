@@ -1,4 +1,4 @@
-package ru.bmstu.rapirapr.azmetov.akka;
+    package ru.bmstu.rapirapr.azmetov.akka;
 
 
 public class SaveHostMessage {
