@@ -64,6 +64,8 @@ public class AnonymizerApp {
                 )));
     }
 
+    private static ()
+
     private static CompletionStage<HttpResponse> fetch(Http http, String url) {
         return http.singleRequest(HttpRequest.create(url));
     }
