@@ -14,7 +14,7 @@ public class ZookeeperController {
 
     public static final String NODE_ROOT_PATH = "";
     public static final String NODE_SERVER_PATH = "";
-    
+
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
     }
@@ -26,7 +26,7 @@ public class ZookeeperController {
         zoo.create(path, host.getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, mode);
     }
 
-    public void addServerNode(String host) {
+    public void addServerNode(String host) throws InterruptedException, KeeperException {
         addNode(host, NODE_ROOT_PATH + NODE_SERVER_PATH, CreateMode.EPHEMERAL_SEQUENTIAL);
     }
     public void watchNodes() {
