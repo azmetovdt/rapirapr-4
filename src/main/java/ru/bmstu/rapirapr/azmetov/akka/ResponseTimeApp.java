@@ -12,10 +12,10 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import scala.concurrent.Future;
 
 import java.time.Duration;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Future;
 
 import static akka.http.javadsl.server.Directives.*;
 
@@ -46,8 +46,8 @@ public class ResponseTimeApp {
 
     private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, ActorMaterializer materializer) {
         return route(
-                get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, id -> {
-                    Future<Object> result = Patterns.ask(actor, id, Duration.ofSeconds(5000));
+                get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, url -> {
+                    Future<Object> result = Patterns.ask(actor, url, 5000);
                     return completeOKWithFuture(result, Jackson.marshaller());
                 })),
         );
