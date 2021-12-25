@@ -39,7 +39,7 @@ public class ZookeeperController {
                     watchNodes();
                 }
             });
-            System.out
+            System.out.println(UPDATE_LOG_MESSAGE);
             List<String> hosts = new ArrayList<>();
             for (String node : nodes) {
                 System.out.println(node);
