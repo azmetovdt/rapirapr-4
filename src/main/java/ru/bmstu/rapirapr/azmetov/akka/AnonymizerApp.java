@@ -49,6 +49,7 @@ public class AnonymizerApp {
         controller.addServerNode(joinUrl(host, port));
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
+        controller.close();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
