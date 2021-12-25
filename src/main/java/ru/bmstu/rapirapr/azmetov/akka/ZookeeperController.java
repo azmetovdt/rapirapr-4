@@ -31,7 +31,7 @@ public class ZookeeperController {
     }
     public void watchNodes() {
         try {
-            List<String> nodes = zoo.getChildren("", watchedEvent -> {
+            List<String> nodes = zoo.getChildren(, watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
                     watchNodes();
                 }
