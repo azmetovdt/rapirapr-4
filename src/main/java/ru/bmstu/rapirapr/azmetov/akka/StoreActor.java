@@ -17,12 +17,17 @@ public class StoreActor extends AbstractActor {
                 .match(RandomHostMessage.class, m -> {
                     sender().tell(new HostMessage(getRandomHost()), getSelf());
                 })
-                .match(SaveHostMessage.class, this::saveResults)
+                .match(SaveHostsMessage.class)
+                .match(SaveHostMessage.class, this::saveHost)
                 .build();
     }
 
-    private void saveResults(SaveHostMessage m) {
+    private void saveHost(SaveHostMessage m) {
         hosts.add(m.getHost());
+    }
+
+    private void saveHosts(SaveHostsMessage m) {
+        hosts = m.getHosts();
     }
 
     private String getRandomHost() {

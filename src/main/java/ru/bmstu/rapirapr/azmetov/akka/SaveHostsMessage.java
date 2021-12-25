@@ -1,14 +1,16 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 
-public class SaveHostsMessage {
-    private static String[] hosts;
+import java.util.List;
 
-    public SaveHostsMessage(String[] hosts) {
+public class SaveHostsMessage {
+    private static List<String> hosts;
+
+    public SaveHostsMessage(List<String> hosts) {
         this.hosts = hosts;
     }
 
-    public String[] getHosts() {
+    public List<String> getHosts() {
         return hosts;
     }
 }
