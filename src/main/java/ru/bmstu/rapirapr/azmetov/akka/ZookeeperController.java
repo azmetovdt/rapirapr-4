@@ -19,7 +19,7 @@ public class ZookeeperController {
 
     public ZookeeperController(String host, ActorRef actor) {
         this.actor = actor;
-        this.zoo 
+        this.zoo = new ZooKeeper()
     }
 
     public void close() throws InterruptedException {
