@@ -17,7 +17,7 @@ public class ZookeeperController {
         this.actor = actor;
     }
 
-    public void watchNodes() throws InterruptedException, KeeperException {
+    public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
