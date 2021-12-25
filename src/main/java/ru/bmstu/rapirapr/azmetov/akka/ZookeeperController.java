@@ -1,6 +1,7 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 import akka.actor.ActorRef;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
@@ -20,7 +21,7 @@ public class ZookeeperController {
         zoo.close();
     }
 
-    public void addNode(String host, String path)
+    public void addNode(String host, String path, CreateMode mode)
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
