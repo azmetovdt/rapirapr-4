@@ -28,13 +28,13 @@ public class AnonymizerApp {
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
     public static final String ZOOKEEPER_HOST = "localhost:2181";
     public static final String DEFAULT_HOST = "localhost";
-    public static final String DEFAULT_PORT = "8080";
+    public static final Integer DEFAULT_PORT = 8080;
 
 
     public static void main(String[] args) throws Exception {
         String host = DEFAULT_HOST;
         String port = DEFAULT_PORT;
-        
+
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
@@ -46,7 +46,7 @@ public class AnonymizerApp {
                 materializer
         );
         final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor);
-        controller.addServerNode(joinUrl("", 8080));
+        controller.addServerNode(joinUrl(host, port));
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
