@@ -41,7 +41,7 @@ public class AnonymizerApp {
                 materializer
         );
         final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor);
-        controller.addServerNode(joinUrl(HTTP_HOST, HTTP_PORT));
+        controller.addServerNode(joinHostUrl(HTTP_HOST, HTTP_PORT));
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         controller.close();
@@ -59,14 +59,14 @@ public class AnonymizerApp {
                                     Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
                                             .thenCompose(msg -> {
                                                 HostMessage m = (HostMessage) msg;
-                                                return fetch(http, m.getHost() + url + "/" + (Integer.parseInt(count)-1));
+                                                return fetch(http, m.getHost() + url + "/" + (Integer.parseInt(count) - 1));
                                             })
                             );
                         })
                 )));
     }
 
-    private static String joinUrl(String host, Integer port) {
+    private static String joinHostUrl(String host, Integer port) {
         return "http://" + host + port;
     }
 
