@@ -26,6 +26,7 @@ public class AnonymizerApp {
     public static final String SERVER_STARTED_MESSAGE = "Сервер запущен";
     public static final String URL_QUERY_PARAMETER_ALIAS = "url";
     public static final String COUNT_QUERY_PARAMETER_ALIAS = "count";
+    public static final String ZOOKEEPER_HOST = ""
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
