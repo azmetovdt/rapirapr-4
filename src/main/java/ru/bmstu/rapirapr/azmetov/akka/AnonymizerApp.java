@@ -39,7 +39,8 @@ public class AnonymizerApp {
                 ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
                 materializer
         );
-        final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor)
+        final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor);
+        controller.
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
