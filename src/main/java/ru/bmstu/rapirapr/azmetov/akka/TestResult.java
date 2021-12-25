@@ -26,7 +26,9 @@ public class TestResult {
         return time;
     }
 
-    public Boolean getIsNew() { return isNew; }
+    public Boolean getIsNew() {
+        return isNew;
+    }
 
     @Override
     public String toString() {
