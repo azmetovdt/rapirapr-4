@@ -1,10 +1,7 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 import akka.actor.ActorRef;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class ZookeeperController {
     }
 
     public void addNode(String host, String path, CreateMode mode) {
-        zoo.create(path, host.getBytes(StandardCharsets.UTF_8), zoo)
+        zoo.create(path, host.getBytes(StandardCharsets.UTF_8), ZooDefs.)
     }
     public void watchNodes() {
         try {
