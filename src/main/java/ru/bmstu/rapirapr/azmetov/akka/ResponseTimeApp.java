@@ -64,7 +64,7 @@ public class ResponseTimeApp {
                     CompletionStage<Object> savedResult = Patterns.ask(actor, new Message(pair.first()), Duration.ofSeconds(5));
                     return savedResult.thenCompose(result -> {
                         if ((Integer) result >= 0) {
-                            return CompletableFuture.completedFuture(new Pair<>(
+                            return CompletableFuture.completedFuture(new TestResult(
                                     pair.first(),
                                     (Integer) result
                             ));
@@ -81,11 +81,11 @@ public class ResponseTimeApp {
                                 .via(routeFlow)
                                 .toMat(Sink.fold(0, Integer::sum), Keep.right())
                                 .run(materializer)
-                                .thenApply(sum -> new Pair<>(pair.first(), sum / pair.second()));
+                                .thenApply(sum -> new TestResult(pair.first(), sum / pair.second(), true));
                     });
                 })
                 .map(request -> {
-                    actor.tell(new TestResult(request.first(), request.second()), ActorRef.noSender());
+                    actor.tell(request, ActorRef.noSender());
                     return HttpResponse.create().withEntity(request.toString());
                 });
     }
