@@ -53,5 +53,7 @@ public class ResponseTimeApp {
                 )));
     }
 
-    
+    CompletionStage<HttpResponse> fetch(String url) {
+        return http.singleRequest(HttpRequest.create(url));
+    }
 }
