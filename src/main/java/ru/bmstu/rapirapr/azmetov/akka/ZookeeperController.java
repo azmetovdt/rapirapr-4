@@ -22,6 +22,8 @@ public class ZookeeperController {
     public void addNode(String host, String path, CreateMode mode) throws InterruptedException, KeeperException {
         zoo.create(path, host.getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, mode);
     }
+
+    public void 
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
