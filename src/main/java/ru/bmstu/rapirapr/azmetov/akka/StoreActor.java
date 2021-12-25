@@ -16,11 +16,12 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(Message.class, message -> sender().tell(getProgramResults(message.getUrl()), self()))
-                .match(TestResult.class, test -> saveResults(test))
+                .match(TestResult.class, this::saveResults)
                 .build();
     }
 
     private void saveResults(TestResult result) {
+        System.out.println("saving: " + result.toString());
         testResultsMap.put(result.getUrl(), result.getTime());
     }
 
