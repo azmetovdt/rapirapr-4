@@ -63,3 +63,4 @@ public class ResponseTimeApp {
         return http.singleRequest(HttpRequest.create(url));
     }
 }
+
