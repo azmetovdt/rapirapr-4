@@ -2,13 +2,13 @@ package ru.bmstu.rapirapr.azmetov.akka;
 
 
 public class SaveHostsMessage {
-    private static String host;
+    private static String[] hosts;
 
-    public SaveHostSMessage(String host) {
-        this.host = host;
+    public SaveHostsMessage(String[] hosts) {
+        this.hosts = hosts;
     }
 
-    public String getHost() {
-        return host;
+    public String[] getHosts() {
+        return hosts;
     }
 }
