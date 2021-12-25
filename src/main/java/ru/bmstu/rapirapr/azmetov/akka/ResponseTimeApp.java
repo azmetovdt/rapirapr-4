@@ -52,7 +52,9 @@ public class ResponseTimeApp {
                                 Future<Object> result = Patterns.ask(actor, url, 5000);
                                 return completeWithFuture(fetch(http, url));
                             }
-                            return completeWithFuture(null);
+                            return completeWithFuture(
+                                    Patterns.ask()
+                            );
                         })
                 )));
     }
