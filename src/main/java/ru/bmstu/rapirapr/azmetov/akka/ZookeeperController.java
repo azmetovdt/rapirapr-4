@@ -40,7 +40,7 @@ public class ZookeeperController {
             List<String> hosts = new ArrayList<>();
             for (String node : nodes) {
                 hosts.add(
-                        Arrays.toString(zoo.getData("" + "/" + node, false, null))
+                        Arrays.toString(zoo.getData(NODE_ROOT_PATH + "/" + node, false, null))
                 );
             }
             actor.tell(new SaveHostsMessage(hosts), ActorRef.noSender());
