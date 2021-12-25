@@ -1,10 +1,10 @@
 package ru.bmstu.rapirapr.azmetov.akka;
 
 
-public class SaveHostMessage {
+public class SaveHostsMessage {
     private static String host;
 
-    public SaveHostMessage(String host) {
+    public SaveHostSMessage(String host) {
         this.host = host;
     }
 
