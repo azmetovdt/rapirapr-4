@@ -5,5 +5,5 @@ import org.apache.zookeeper.ZooKeeper;
 
 public class ZookeeperController {
     private ZooKeeper zoo;
-    private ActorRef
+    private ActorRef actor;
 }
