@@ -50,8 +50,9 @@ public class ResponseTimeApp {
                         parameter(COUNT_QUERY_PARAMETER_ALIAS, count -> {
                             if(Integer.parseInt(count) > 0) {
                                 Future<Object> result = Patterns.ask(actor, url, 5000);
-                                return completeWith(fetch(http, url));
+                                return completeWithFuture(fetch(http, url));
                             }
+                            return null;
                         })
                 )));
     }
