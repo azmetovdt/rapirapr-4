@@ -40,7 +40,7 @@ public class AnonymizerApp {
                 materializer
         );
         final ZookeeperConfiguration controller = new ZookeeperConfiguration(ZOOKEEPER_HOST, actor);
-        controller.addServerNode(joinUrl());
+        controller.addServerNode(joinUrl("", 8080));
         System.out.println(SERVER_STARTED_MESSAGE);
         System.in.read();
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
@@ -64,7 +64,7 @@ public class AnonymizerApp {
                 )));
     }
 
-    private String joinUrl(String host, Integer port) {
+    private static String joinUrl(String host, Integer port) {
         return "http://" + host + port;
     }
 
