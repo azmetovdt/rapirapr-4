@@ -12,7 +12,7 @@ public class StoreActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(RandomHostMessage.class -> sender().tell();)
+                .match(RandomHostMessage.class -> sender().tell(new HostMessage(getRandomHost()));)
                 .match(TestResult.class, this::saveResults)
                 .build();
     }
