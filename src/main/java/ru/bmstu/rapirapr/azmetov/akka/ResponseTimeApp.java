@@ -32,7 +32,7 @@ public class ResponseTimeApp {
         ActorRef actor = system.actorOf(Props.create(StoreActor.class));
         ActorMaterializer materializer = ActorMaterializer.create(system);
         final Http http = Http.get(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute(actor, materializer);
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = createRoute(actor, http);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(HTTP_HOST, HTTP_PORT),
@@ -43,17 +43,18 @@ public class ResponseTimeApp {
         binding.thenCompose(ServerBinding::unbind).thenAccept(unbound -> system.terminate());
     }
 
-    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, ActorMaterializer materializer) {
+    private static Flow<HttpRequest, HttpResponse, NotUsed> createRoute(ActorRef actor, Http http) {
         return route(
                 get(() -> parameter(URL_QUERY_PARAMETER_ALIAS, url ->
                         parameter(COUNT_QUERY_PARAMETER_ALIAS, count -> {
+                            if(count)
                             Future<Object> result = Patterns.ask(actor, url, 5000);
-                            return completeOKWithFuture(result, Jackson.marshaller());
+                            return completeOKWithFuture(fetch(http, url));
                         })
                 )));
     }
 
-    private static CompletionStage<HttpResponse> fetch(String url) {
+    private static CompletionStage<HttpResponse> fetch(Http http, String url) {
         return http.singleRequest(HttpRequest.create(url));
     }
 }
