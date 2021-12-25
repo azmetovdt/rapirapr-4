@@ -58,7 +58,7 @@ public class ResponseTimeApp {
                                             .thenCompose(msg -> {
                                                 HostMessage m = (HostMessage) msg;
                                                 return fetch(
-                                                        m.getHost() + url + "/" + count
+                                                        m.getHost() + url + "/" + count.toString()
                                                 )
                                             })
                             );
