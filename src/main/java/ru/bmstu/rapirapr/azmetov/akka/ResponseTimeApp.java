@@ -55,6 +55,7 @@ public class ResponseTimeApp {
                             }
                             return completeWithFuture(
                                     Patterns.ask(actor, new RandomHostMessage(), Duration.ofSeconds(5))
+                                            .thenCompose()
                             );
                         })
                 )));
