@@ -21,7 +21,11 @@ public class ZookeeperController {
         zoo.close();
     }
 
-    public void addNode(String host, String path, CreateMode mode)
+    public void addNode(String host, String path, CreateMode mode) {
+        zoo.create(
+                
+        )
+    }
     public void watchNodes() {
         try {
             List<String> nodes = zoo.getChildren("", watchedEvent -> {
