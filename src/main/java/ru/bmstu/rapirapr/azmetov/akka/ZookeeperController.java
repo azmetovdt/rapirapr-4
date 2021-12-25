@@ -24,7 +24,7 @@ public class ZookeeperController {
     }
 
     public void addServerNode(String host) {
-        addNode(path,);
+        addNode();
     }
     public void watchNodes() {
         try {
