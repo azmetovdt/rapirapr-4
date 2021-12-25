@@ -25,7 +25,9 @@ public class StoreActor extends AbstractActor {
         testResultsMap.put(result.getUrl(), result.getTime());
     }
 
-    private void getRandomHost
+    private void getRandomHost() {
+        
+    }
 
     private Number getProgramResults(String id) {
         return testResultsMap.getOrDefault(id, -1);
