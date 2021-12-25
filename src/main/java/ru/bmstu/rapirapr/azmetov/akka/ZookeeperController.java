@@ -3,6 +3,7 @@ package ru.bmstu.rapirapr.azmetov.akka;
 import akka.actor.ActorRef;
 import org.apache.zookeeper.*;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +18,12 @@ public class ZookeeperController {
     public static final String UPDATE_LOG_MESSAGE = "Список нод изменилсяо: ";
     public static final Integer ZOO_TIMEOUT = 5000;
 
-    public ZookeeperController(String host, ActorRef actor) {
+    public ZookeeperController(String host, ActorRef actor) throws IOException {
         this.actor = actor;
         this.zoo = new ZooKeeper(host, ZOO_TIMEOUT, watchedEvent -> {
-            
-        })
+            System.out.println(watchedEvent.getState());
+        });
+        watchNodes();
     }
 
     public void close() throws InterruptedException {
